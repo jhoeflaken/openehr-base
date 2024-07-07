@@ -1,3 +1,3 @@
 pub mod foundation_types;
-mod base_types;
-mod resource;
+pub mod base_types;
+pub mod resource;

@@ -1,5 +1,5 @@
-mod authored_resource;
-mod translation_details;
-mod resource_description;
-mod resource_description_item;
-mod resource_annotations;
+pub mod authored_resource;
+pub mod translation_details;
+pub mod resource_description;
+pub mod resource_description_item;
+pub mod resource_annotations;
