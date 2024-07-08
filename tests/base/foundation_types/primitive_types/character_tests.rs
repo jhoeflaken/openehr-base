@@ -39,6 +39,48 @@ mod character_tests {
     }
 
     #[test]
+    fn character_partial_ordering_less_than() {
+        let char_a = Character::new('a');
+        let char_b = Character::new('b');
+        assert!(char_a < char_b);
+    }
+
+    #[test]
+    fn character_partial_ordering_less_than_or_equal_with_equal_values() {
+        let char_a = Character::new('c');
+        let char_b = Character::new('c');
+        assert!(char_a <= char_b);
+    }
+
+    #[test]
+    fn character_partial_ordering_less_than_or_equal_with_less_value() {
+        let char_a = Character::new('d');
+        let char_b = Character::new('e');
+        assert!(char_a <= char_b);
+    }
+
+    #[test]
+    fn character_partial_ordering_greater_than() {
+        let char_a = Character::new('y');
+        let char_b = Character::new('x');
+        assert!(char_a > char_b);
+    }
+
+    #[test]
+    fn character_partial_ordering_greater_than_or_equal_with_equal_values() {
+        let char_a = Character::new('z');
+        let char_b = Character::new('z');
+        assert!(char_a >= char_b);
+    }
+
+    #[test]
+    fn character_partial_ordering_greater_than_or_equal_with_greater_value() {
+        let char_a = Character::new('r');
+        let char_b = Character::new('q');
+        assert!(char_a >= char_b);
+    }
+
+    #[test]
     fn debug_format_matches_expected_output() {
         let character = Character::new('c');
         assert_eq!(format!("{:?}", character), "c");

@@ -39,6 +39,48 @@ mod octet_tests {
     }
 
     #[test]
+    fn octet_partial_ordering_less_than() {
+        let octet_a = Octet::new(10);
+        let octet_b = Octet::new(20);
+        assert!(octet_a < octet_b);
+    }
+
+    #[test]
+    fn octet_partial_ordering_less_than_or_equal_with_equal_values() {
+        let octet_a = Octet::new(30);
+        let octet_b = Octet::new(30);
+        assert!(octet_a <= octet_b);
+    }
+
+    #[test]
+    fn octet_partial_ordering_less_than_or_equal_with_less_value() {
+        let octet_a = Octet::new(40);
+        let octet_b = Octet::new(50);
+        assert!(octet_a <= octet_b);
+    }
+
+    #[test]
+    fn octet_partial_ordering_greater_than() {
+        let octet_a = Octet::new(60);
+        let octet_b = Octet::new(50);
+        assert!(octet_a > octet_b);
+    }
+
+    #[test]
+    fn octet_partial_ordering_greater_than_or_equal_with_equal_values() {
+        let octet_a = Octet::new(70);
+        let octet_b = Octet::new(70);
+        assert!(octet_a >= octet_b);
+    }
+
+    #[test]
+    fn octet_partial_ordering_greater_than_or_equal_with_greater_value() {
+        let octet_a = Octet::new(80);
+        let octet_b = Octet::new(70);
+        assert!(octet_a >= octet_b);
+    }
+
+    #[test]
     fn debug_format_matches_expected_output() {
         let octet = Octet::new(123);
         assert_eq!(format!("{:?}", octet), "123");

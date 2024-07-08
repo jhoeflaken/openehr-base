@@ -1,4 +1,5 @@
 use crate::base::foundation_types::primitive_types::any::Any;
+use crate::base::foundation_types::primitive_types::ordered::Ordered;
 
 pub struct Character {
     pub value: char,
@@ -7,6 +8,14 @@ pub struct Character {
 impl Character {
     pub fn new(value: char) -> Self {
         Self { value }
+    }
+}
+
+impl Ordered for Character {}
+
+impl PartialOrd for Character {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.value.partial_cmp(&other.value)
     }
 }
 

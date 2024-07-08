@@ -1,6 +1,7 @@
 use std::fmt::Debug;
 
 use crate::base::foundation_types::primitive_types::any::Any;
+use crate::base::foundation_types::primitive_types::ordered::Ordered;
 
 pub struct Octet {
     value: u8,
@@ -9,6 +10,14 @@ pub struct Octet {
 impl Octet {
     pub fn new(value: u8) -> Octet {
         Octet { value }
+    }
+}
+
+impl Ordered for Octet {}
+
+impl PartialOrd for Octet {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.value.partial_cmp(&other.value)
     }
 }
 
