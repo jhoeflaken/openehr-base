@@ -7,7 +7,7 @@ mod integer64;
 mod real;
 mod double;
 mod character;
-mod octet;
+pub mod octet;
 mod byte;
 mod string;
 pub mod boolean;

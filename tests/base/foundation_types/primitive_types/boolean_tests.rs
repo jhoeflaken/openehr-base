@@ -1,10 +1,7 @@
-use openehr::base::foundation_types::primitive_types::boolean::Boolean;
-use openehr::base::foundation_types::primitive_types::any::Any;
-
-
 #[cfg(test)]
-mod tests {
-    use super::*;
+mod boolean_tests {
+    use openehr::base::foundation_types::primitive_types::boolean::Boolean;
+    use openehr::base::foundation_types::primitive_types::any::Any;
 
     #[test]
     fn boolean_equality_with_same_value_returns_true() {
@@ -39,6 +36,12 @@ mod tests {
         let a = Boolean::new(true);
         let b = Boolean::new(false);
         assert_ne!(a, b);
+    }
+
+    #[test]
+    fn debug_format_matches_expected_output() {
+        let boolean = Boolean::new(true);
+        assert_eq!(format!("{:?}", boolean), "Boolean(true)");
     }
 }
 
