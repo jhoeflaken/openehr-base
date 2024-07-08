@@ -12,7 +12,7 @@ impl Character {
 
 impl Any for Character {
     fn is_equal(&self, other: &dyn std::any::Any) -> bool {
-        if let Some(other) = other.downcast_ref::<Self>() {
+        if let Some(other) = other.downcast_ref::<Character>() {
             self.value == other.value
         } else {
             false
