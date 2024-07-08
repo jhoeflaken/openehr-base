@@ -10,3 +10,4 @@ pub mod character;
 pub mod octet;
 pub mod string;
 pub mod boolean;
+pub mod uri;
