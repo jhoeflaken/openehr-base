@@ -40,6 +40,80 @@ mod integer_tests {
     }
 
     #[test]
+    fn addition_of_two_integers() {
+        let integer_a = Integer::new(34567890);
+        let integer_b = Integer::new(10);
+        let result = integer_a + integer_b;
+        assert_eq!(result.value, 34567900);
+    }
+
+    #[test]
+    fn subtraction_of_two_integers() {
+        let integer_a = Integer::new(34567890);
+        let integer_b = Integer::new(10);
+        let result = integer_a - integer_b;
+        assert_eq!(result.value, 34567880);
+    }
+
+    #[test]
+    fn multiplication_of_two_integers() {
+        let integer_a = Integer::new(34567890);
+        let integer_b = Integer::new(10);
+        let result = integer_a * integer_b;
+        assert_eq!(result.value, 345678900);
+    }
+
+    #[test]
+    fn division_of_two_integers() {
+        let integer_a = Integer::new(34567890);
+        let integer_b = Integer::new(10);
+        let result = integer_a / integer_b;
+        assert_eq!(result.value, 3456789);
+    }
+
+    #[test]
+    fn negation_of_a_integer() {
+        let integer = Integer::new(34567890);
+        let result = -integer;
+        assert_eq!(result.value, -34567890);
+    }
+
+    #[test]
+    fn partial_ordering_less_than() {
+        let integer_a = Integer::new(10);
+        let integer_b = Integer::new(20);
+        assert!(integer_a < integer_b);
+    }
+
+    #[test]
+    fn partial_ordering_greater_than() {
+        let integer_a = Integer::new(30);
+        let integer_b = Integer::new(20);
+        assert!(integer_a > integer_b);
+    }
+
+    #[test]
+    fn partial_ordering_less_than_or_equal_with_equal_values() {
+        let integer_a = Integer::new(20);
+        let integer_b = Integer::new(20);
+        assert!(integer_a <= integer_b);
+    }
+
+    #[test]
+    fn partial_ordering_less_than_or_equal_with_less_value() {
+        let integer_a = Integer::new(11);
+        let integer_b = Integer::new(22);
+        assert!(integer_a <= integer_b);
+    }
+
+    #[test]
+    fn partial_ordering_greater_than_or_equal_with_equal_values() {
+        let integer_a = Integer::new(33);
+        let integer_b = Integer::new(33);
+        assert!(integer_a >= integer_b);
+    }
+
+    #[test]
     fn debug_format_matches_expected_output() {
         let int = Integer::new(-70);
         assert_eq!(format!("{:?}", int), "-70");
