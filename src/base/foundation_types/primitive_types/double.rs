@@ -4,7 +4,7 @@ use crate::base::foundation_types::primitive_types::ordered::Ordered;
 use crate::base::foundation_types::primitive_types::ordered_numeric::OrderedNumeric;
 
 pub struct Double {
-    value: f64,
+    pub value: f64,
 }
 
 impl Double {

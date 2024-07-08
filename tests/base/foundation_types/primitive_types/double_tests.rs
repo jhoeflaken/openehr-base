@@ -39,6 +39,95 @@ mod double_tests {
     }
 
     #[test]
+    fn addition_of_two_doubles() {
+        let double_a = Double::new(5.5);
+        let double_b = Double::new(4.5);
+        let result = double_a + double_b;
+        assert_eq!(result.value, 10.0);
+    }
+
+    #[test]
+    fn subtraction_of_two_doubles() {
+        let double_a = Double::new(10.0);
+        let double_b = Double::new(4.5);
+        let result = double_a - double_b;
+        assert_eq!(result.value, 5.5);
+    }
+
+    #[test]
+    fn multiplication_of_two_doubles() {
+        let double_a = Double::new(2.0);
+        let double_b = Double::new(3.5);
+        let result = double_a * double_b;
+        assert_eq!(result.value, 7.0);
+    }
+
+    #[test]
+    fn division_of_two_doubles() {
+        let double_a = Double::new(10.0);
+        let double_b = Double::new(2.0);
+        let result = double_a / double_b;
+        assert_eq!(result.value, 5.0);
+    }
+
+    #[test]
+    fn negation_of_a_double() {
+        let double = Double::new(5.0);
+        let result = -double;
+        assert_eq!(result.value, -5.0);
+    }
+
+    #[test]
+    fn division_by_zero_yields_infinity() {
+        let double_a = Double::new(1.0);
+        let double_b = Double::new(0.0);
+        let result = double_a / double_b;
+        assert!(result.value.is_infinite());
+    }
+
+    #[test]
+    fn partial_ordering_less_than() {
+        let double_a = Double::new(1.1);
+        let double_b = Double::new(2.2);
+        assert!(double_a < double_b);
+    }
+
+    #[test]
+    fn partial_ordering_greater_than() {
+        let double_a = Double::new(3.3);
+        let double_b = Double::new(2.2);
+        assert!(double_a > double_b);
+    }
+
+    #[test]
+    fn partial_ordering_less_than_or_equal_with_equal_values() {
+        let double_a = Double::new(2.2);
+        let double_b = Double::new(2.2);
+        assert!(double_a <= double_b);
+    }
+
+    #[test]
+    fn partial_ordering_less_than_or_equal_with_less_value() {
+        let double_a = Double::new(1.1);
+        let double_b = Double::new(2.2);
+        assert!(double_a <= double_b);
+    }
+
+    #[test]
+    fn partial_ordering_greater_than_or_equal_with_equal_values() {
+        let double_a = Double::new(3.3);
+        let double_b = Double::new(3.3);
+        assert!(double_a >= double_b);
+    }
+
+    #[test]
+    fn partial_ordering_greater_than_or_equal_with_greater_value() {
+        let double_a = Double::new(4.4);
+        let double_b = Double::new(3.3);
+        assert!(double_a >= double_b);
+    }
+
+    #[test]
     fn debug_format_matches_expected_output() {
         let double = Double::new(-16.17);
         assert_eq!(format!("{:?}", double), "-16.17");
