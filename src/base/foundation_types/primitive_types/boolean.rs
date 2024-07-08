@@ -44,7 +44,7 @@ impl Eq for Boolean {}
 
 impl Debug for Boolean {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Boolean({})", self.value)
+        write!(f, "{}", self.value)
     }
 }
 

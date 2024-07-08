@@ -41,7 +41,7 @@ mod boolean_tests {
     #[test]
     fn debug_format_matches_expected_output() {
         let boolean = Boolean::new(true);
-        assert_eq!(format!("{:?}", boolean), "Boolean(true)");
+        assert_eq!(format!("{:?}", boolean), "true");
     }
 }
 

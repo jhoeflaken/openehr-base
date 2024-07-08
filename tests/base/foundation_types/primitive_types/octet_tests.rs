@@ -41,6 +41,6 @@ mod octet_tests {
     #[test]
     fn debug_format_matches_expected_output() {
         let octet = Octet::new(123);
-        assert_eq!(format!("{:?}", octet), "Octet(123)");
+        assert_eq!(format!("{:?}", octet), "123");
     }
 }

@@ -32,6 +32,6 @@ impl Eq for Octet {}
 
 impl Debug for Octet {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Octet({})", self.value)
+        write!(f, "{}", self.value)
     }
 }
