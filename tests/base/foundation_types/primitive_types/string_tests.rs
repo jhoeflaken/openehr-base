@@ -18,6 +18,14 @@ mod tests {
     }
 
     #[test]
+    fn add_combines_two_strings_with_str() {
+        let string1 = String::new("Hello".to_string());
+        let string2 = ", world!";
+        let result = string1 + string2;
+        assert_eq!(result.value, "Hello, world!");
+    }
+
+    #[test]
     fn is_integer_returns_true_for_integer_string() {
         let integer_string = String::new("123".to_string());
         assert!(integer_string.is_integer());
@@ -69,10 +77,15 @@ mod tests {
         assert!(string1 > string2);
     }
 
-
     #[test]
     fn debug_format_matches_expected_for_string() {
         let custom_string = String::new("Hello, world!".to_string());
         assert_eq!(format!("{:?}", custom_string), "Hello, world!");
+    }
+
+    #[test]
+    fn display_format_matches_expected_for_string() {
+        let custom_string = String::new("Hello, world!".to_string());
+        assert_eq!(format!("{}", custom_string), "Hello, world!");
     }
 }
