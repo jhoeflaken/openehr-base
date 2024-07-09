@@ -5,3 +5,4 @@ mod real_tests;
 mod integer64_tests;
 mod integer_tests;
 mod double_tests;
+mod string_tests;
