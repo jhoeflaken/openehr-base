@@ -3,5 +3,12 @@
 version = 3
 
 [[package]]
+name = "base"
+version = "1.0.0"
+
+[[package]]
 name = "openehr"
 version = "0.1.0"
+dependencies = [
+ "base",
+]
