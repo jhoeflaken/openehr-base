@@ -16,6 +16,11 @@ pub use integer::Integer;
 mod double;
 pub use double::Double;
 
+mod real;
+pub use real::Real;
+
+
+
 
 
 
