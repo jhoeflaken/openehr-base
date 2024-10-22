@@ -18,6 +18,10 @@ pub use double::Double;
 
 mod real;
 pub use real::Real;
+mod integer64;
+pub use integer64::Integer64;
+
+
 
 
 
