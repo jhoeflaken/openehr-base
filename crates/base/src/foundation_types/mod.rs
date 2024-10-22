@@ -7,6 +7,7 @@ mod double;
 mod real;
 mod integer64;
 mod boolean;
+mod character;
 
 pub use any::Any;
 pub use numeric::Numeric;
@@ -17,6 +18,7 @@ pub use double::Double;
 pub use real::Real;
 pub use integer64::Integer64;
 pub use boolean::Boolean;
+pub use character::Character;
 
 
 
