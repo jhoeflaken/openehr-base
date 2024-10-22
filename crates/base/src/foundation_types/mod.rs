@@ -8,6 +8,7 @@ mod real;
 mod integer64;
 mod boolean;
 mod character;
+mod octet;
 
 pub use any::Any;
 pub use numeric::Numeric;
@@ -19,6 +20,7 @@ pub use real::Real;
 pub use integer64::Integer64;
 pub use boolean::Boolean;
 pub use character::Character;
+pub use octet::Octet;
 
 
 
