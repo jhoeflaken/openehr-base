@@ -4,4 +4,6 @@ version = "1.0.0"
 edition = "2021"
 
 [dependencies]
-
+uniresid="0.1.5"
+once_cell = "1.20.2"
+thiserror = "1.0.65"

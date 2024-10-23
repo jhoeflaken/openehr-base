@@ -9,6 +9,7 @@ mod integer64;
 mod boolean;
 mod character;
 mod octet;
+mod uri;
 
 pub use any::Any;
 pub use numeric::Numeric;
@@ -21,6 +22,7 @@ pub use integer64::Integer64;
 pub use boolean::Boolean;
 pub use character::Character;
 pub use octet::Octet;
+pub use uri::Uri;
 
 
 
