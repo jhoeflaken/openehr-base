@@ -65,23 +65,6 @@ impl AbsoluteUri {
         self.uri.host_to_string()
     }
 
-    /// Apply the `remove_dot_segments` routine talked about
-    /// in [RFC 3986 section
-    /// 5.2](https://tools.ietf.org/html/rfc3986#section-5.2) to the path
-    /// segments of the URI, in order to normalize the path (apply and remove
-    /// "." and ".." segments).
-    ///
-    /// # Examples
-    ///
-    /// ```rust
-    /// use uniresid::Uri;
-    ///
-    /// # fn main() {
-    /// let mut uri = Uri::parse("/a/b/c/./../../g").unwrap();
-    /// uri.normalize();
-    /// assert_eq!("/a/g", uri.path_to_string().unwrap());
-    /// # }
-    /// ```
     pub fn normalize(&mut self) {
         self.uri.normalize()
     }
@@ -168,23 +151,6 @@ impl AbsoluteUri {
         self.uri.query_to_string()
     }
 
-    /// Return a new URI which is the result of applying the given relative
-    /// reference to the URI, following the algorithm from [RFC 3986 section
-    /// 5.2.2](https://tools.ietf.org/html/rfc3986#section-5.2.2).
-    ///
-    /// # Examples
-    ///
-    /// ```rust
-    /// use uniresid::Uri;
-    ///
-    /// # fn main() -> Result<(), uniresid::Error> {
-    /// let base = Uri::parse("http://a/b/c/d;p?q")?;
-    /// let relative_reference = Uri::parse("g;x?y#s")?;
-    /// let resolved = base.resolve(&relative_reference);
-    /// assert_eq!("http://a/b/c/g;x?y#s", resolved.to_string());
-    /// # Ok(())
-    /// # }
-    /// ```
     #[must_use]
     pub fn resolve(&self, relative_reference: impl Borrow<Uri>) -> Self {
         // the unwrap bel
