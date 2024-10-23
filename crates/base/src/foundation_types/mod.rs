@@ -1,4 +1,10 @@
 mod primitive_types;
+mod functional;
+mod structured_types;
+mod terminology;
+mod time;
+mod interval;
+
 pub use primitive_types::{
     Any,
     Boolean,
@@ -14,4 +20,24 @@ pub use primitive_types::{
     Uri,
     String,
     StringExtension,
+};
+
+pub use functional::{
+
+};
+
+pub use structured_types::{
+
+};
+
+pub use terminology::{
+
+};
+
+pub use time::{
+
+};
+
+pub use interval::{
+
 };
