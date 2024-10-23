@@ -18,6 +18,8 @@ use error::Error;
 use absolute_uri::AbsoluteUri;
 use std::{collections::HashSet, convert::TryFrom, ops::Deref};
 use std::{fmt::Write, string::FromUtf8Error};
+use std::cmp::Ordering;
+use crate::foundation_types::{Any, Ordered};
 
 /// This type is used to parse and generate URI strings to and from their
 /// various components.  Components are percent-encoded as necessary during
@@ -816,6 +818,35 @@ impl From<&AbsoluteUri> for Uri {
         absolute_uri.uri.clone()
     }
 }
+
+impl Any for Uri {
+
+    fn is_equal(&self, other: &Self) -> bool {
+        self.raw == other.raw
+    }
+
+    fn instance_of(&self, type_name: &str) -> bool {
+        "Uri" == type_name
+    }
+
+    fn type_of(&self) -> String {
+        "Uri".to_string()
+    }
+}
+
+impl PartialOrd for Uri {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        self.partial_cmp(other)
+    }
+}
+
+impl Ord for Uri {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.cmp(other)
+    }
+}
+
+impl Ordered for Uri {}
 
 #[cfg(feature = "url")]
 impl TryInto<Uri> for url_::Url {
