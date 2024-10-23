@@ -31,7 +31,8 @@ pub use structured_types::{
 };
 
 pub use terminology::{
-
+    TerminologyCode,
+    TerminologyTerm
 };
 
 pub use time::{
