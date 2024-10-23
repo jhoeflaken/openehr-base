@@ -10,6 +10,7 @@ mod boolean;
 mod character;
 mod octet;
 mod uri;
+mod string;
 
 pub use any::Any;
 pub use numeric::Numeric;
@@ -23,6 +24,7 @@ pub use boolean::Boolean;
 pub use character::Character;
 pub use octet::Octet;
 pub use uri::Uri;
+pub use string::{String, StringExtension};
 
 
 

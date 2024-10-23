@@ -107,4 +107,12 @@ pub static REG_NAME_NOT_PCT_ENCODED: Lazy<HashSet<char>> = Lazy::new(|| {
 
 // This is the character set corresponds to the last part of the "IPvFuture" syntax specified in
 // RFC 3986.
-pub static IPV_FUTURE_LAST_PART: Lazy<HashSet<char>> = USER_INFO_NOT_PCT_ENCODED;
+pub static IPV_FUTURE_LAST_PART: Lazy<HashSet<char>> = Lazy::new(|| {
+    UNRESERVED
+        .iter()
+        .chain(SUB_DELIMS.iter())
+        .chain([':'].iter())
+        .copied()
+        .collect()
+});
+

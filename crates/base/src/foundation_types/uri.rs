@@ -21,77 +21,6 @@ use std::{fmt::Write, string::FromUtf8Error};
 use std::cmp::Ordering;
 use crate::foundation_types::{Any, Ordered};
 
-/// This type is used to parse and generate URI strings to and from their
-/// various components.  Components are percent-encoded as necessary during
-/// generation, and percent encodings are decoded during parsing.
-///
-/// Since most URI components, once decoded, may include non-UTF8 byte
-/// sequences (which are always percent-encoded), getter methods such as
-/// [`path`] and [`query`] return byte array [slice] references (`&[u8]`)
-/// rather than string or string slice references.  Fallible convenience
-/// methods ending in `_to_string`, such as [`path_to_string`] and
-/// [`query_to_string`], are provided to convert these to strings.
-///
-/// The "Authority" part of the Uri is represented by the [`Authority` type].
-/// Although the `Uri` type provides [`user_info`], [`host`], and [`port`]
-/// methods for convenience, `Uri` holds these components through the
-/// [`Authority` type], which can be accessed via [`authority`] and
-/// [`set_authority`].  To set or change the `user_info`, host, or port of a
-/// `Uri`, construct a new `Authority` value and set it in the `Uri` with
-/// [`set_authority`].
-///
-/// # Examples
-///
-/// ## Parsing a URI into its components
-///
-/// ```rust
-/// use uniresid::Uri;
-///
-/// # fn main() {
-/// let uri = Uri::parse("http://www.example.com/foo?bar#baz").unwrap();
-/// let authority = uri.authority().unwrap();
-/// assert_eq!("www.example.com".as_bytes(), authority.host());
-/// assert_eq!(Some("www.example.com"), uri.host_to_string().unwrap().as_deref());
-/// assert_eq!("/foo", uri.path_to_string().unwrap());
-/// assert_eq!(Some("bar"), uri.query_to_string().unwrap().as_deref());
-/// assert_eq!(Some("baz"), uri.fragment_to_string().unwrap().as_deref());
-/// # }
-/// ```
-///
-/// Implementations are provided for the [`TryFrom`] trait, so that
-/// [`TryFrom::try_from`] or [`TryInto::try_into`] may be used as alternatives
-/// to [`parse`].
-///
-/// ## Generating a URI from its components
-///
-/// ```rust
-/// use uniresid::{ Authority, Uri };
-///
-/// let mut uri = Uri::default();
-/// assert!(uri.set_scheme(String::from("http")).is_ok());
-/// let mut authority = Authority::default();
-/// authority.set_host("www.example.com");
-/// uri.set_authority(Some(authority));
-/// uri.set_path_from_str("/foo");
-/// uri.set_query(Some("bar".into()));
-/// uri.set_fragment(Some("baz".into()));
-/// assert_eq!("http://www.example.com/foo?bar#baz", uri.to_string());
-/// ```
-///
-/// [`authority`]: #method.authority
-/// [`Authority` type]: struct.Authority.html
-/// [`host`]: #method.host
-/// [`parse`]: #method.parse
-/// [`path`]: #method.path
-/// [`path_to_string`]: #method.path_to_string
-/// [`port`]: #method.port
-/// [`query`]: #method.query
-/// [`query_to_string`]: #method.query_to_string
-/// [`set_authority`]: #method.set_authority
-/// [`user_info`]: #method.user_info
-/// [slice]: https://doc.rust-lang.org/std/primitive.slice.html
-/// [`TryFrom::try_from`]: https://doc.rust-lang.org/std/convert/trait.TryFrom.html#tymethod.try_from
-/// [`TryInto::try_into`]: https://doc.rust-lang.org/std/convert/trait.TryInto.html#tymethod.try_into
 #[derive(Clone, Default, Hash, PartialEq, Eq)]
 pub struct Uri {
     scheme: Option<String>,
@@ -165,23 +94,6 @@ impl Uri {
         self.scheme.is_none()
     }
 
-    /// Apply the `remove_dot_segments` routine talked about
-    /// in [RFC 3986 section
-    /// 5.2](https://tools.ietf.org/html/rfc3986#section-5.2) to the path
-    /// segments of the URI, in order to normalize the path (apply and remove
-    /// "." and ".." segments).
-    ///
-    /// # Examples
-    ///
-    /// ```rust
-    /// use uniresid::Uri;
-    ///
-    /// # fn main() {
-    /// let mut uri = Uri::parse("/a/b/c/./../../g").unwrap();
-    /// uri.normalize();
-    /// assert_eq!("/a/g", uri.path_to_string().unwrap());
-    /// # }
-    /// ```
     pub fn normalize(&mut self) {
         self.path = Self::normalize_path(&self.path);
         self.update_raw();
@@ -291,23 +203,7 @@ impl Uri {
             .transpose()
     }
 
-    /// Return a new URI which is the result of applying the given relative
-    /// reference to the URI, following the algorithm from [RFC 3986 section
-    /// 5.2.2](https://tools.ietf.org/html/rfc3986#section-5.2.2).
-    ///
-    /// # Examples
-    ///
-    /// ```rust
-    /// use uniresid::Uri;
-    ///
-    /// # fn main() -> Result<(), uniresid::Error> {
-    /// let base = Uri::parse("http://a/b/c/d;p?q")?;
-    /// let relative_reference = Uri::parse("g;x?y#s")?;
-    /// let resolved = base.resolve(&relative_reference);
-    /// assert_eq!("http://a/b/c/g;x?y#s", resolved.to_string());
-    /// # Ok(())
-    /// # }
-    /// ```
+
     #[must_use]
     pub fn resolve(&self, relative_reference: &Self) -> Self {
         let (scheme, authority, path, query) = if relative_reference.scheme.is_some() {
@@ -836,13 +732,13 @@ impl Any for Uri {
 
 impl PartialOrd for Uri {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        self.partial_cmp(other)
+        self.raw.partial_cmp(&other.raw)
     }
 }
 
 impl Ord for Uri {
     fn cmp(&self, other: &Self) -> Ordering {
-        self.cmp(other)
+        self.raw.cmp(&other.raw)
     }
 }
 
